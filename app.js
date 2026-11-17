@@ -128,7 +128,8 @@ const trip = [
         "name": "Good Day Coffee",
         "type": "美食",
         "map": "33 585 034*25",
-        "detail": "原表填寫 *25；網路資料同時出現 *25 與 *28 兩種版本。"
+        "mapUncertain": true,
+        "detail": "Excel 填寫 *25，但查到的公開資料另有 *26、*27、*28 等版本，尚無法確認哪一組能精準定位店家；橘色按鈕代表需再確認。"
       },
       {
         "time": "上午",
@@ -258,7 +259,7 @@ function eventCard(e){
     <div class="event-top"><span class="type">${esc(e.type)}</span></div>
     <h3>${esc(e.name)}</h3>
     ${e.detail?`<p>${esc(e.detail)}</p>`:''}
-    ${e.map?`<div class="mapbox"><div><small>MAP CODE</small><strong>${esc(e.map)}</strong></div><button class="copy" data-copy="${esc(e.map)}">複製代碼</button></div>`:''}
+    ${e.map?`<div class="mapbox"><div><small>MAP CODE</small><strong>${esc(e.map)}</strong></div><button class="copy${e.mapUncertain?' copy-uncertain':''}" data-copy="${esc(e.map)}"${e.mapUncertain?' title="此代碼尚未確認，請先核對" aria-label="複製尚未確認的 Map Code"':''}>複製代碼</button></div>`:''}
     ${e.phone?`<p class="meta">電話：<a href="tel:${esc(e.phone.replaceAll('-',''))}">${esc(e.phone)}</a></p>`:''}
     ${e.address?`<p class="meta">地址：${esc(e.address)}</p>`:''}
     <div class="links"><a href="${mapUrl(e)}" target="_blank" rel="noopener">Google 地圖導航 ↗</a>${e.url?`<a href="${esc(e.url)}" target="_blank" rel="noopener">預約／官方連結 ↗</a>`:''}</div>
